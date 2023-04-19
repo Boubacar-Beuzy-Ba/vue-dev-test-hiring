@@ -1,11 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import MovieList from './components/MovieList.vue'
 </script>
 
 <template>
   <header>
-    <div class="wrapper">
-      <h1 class="text-3xl font-extrabold mx-auto text-center mt-5">This is it</h1>
+    <div class=" mx-12 mt-12 text-center">
+      <movie-list></movie-list>
     </div>
   </header>
 
