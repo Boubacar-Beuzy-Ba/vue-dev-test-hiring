@@ -1,6 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import MovieList from './components/MovieList.vue'
+import { useMovieStore } from './stores/MovieStore';
+const movieStore = useMovieStore();
+movieStore.fill();
 </script>
 
 <template>
