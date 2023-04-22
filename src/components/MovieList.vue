@@ -17,7 +17,7 @@
         </div>
     </div>
     <!-- Pagination UI -->
-    <div class="flex justify-center my-4">
+    <div class="flex justify-center my-4 gap-2 content-center items-center">
       <button
         @click="previous"
         :disabled="page === 1"
@@ -25,6 +25,8 @@
       >
         Prev
       </button>
+      <div class="bg-gray-200 rounded-full w-8 ">{{ this.page }}</div>
+      <div class="bg-red-200 rounded-full w-8">{{ parseInt(this.totalResults/10) }}</div>
       <button
         @click="next"
         :disabled="page === totalResults"
@@ -48,6 +50,9 @@
          computed: {
             ...mapState(useMovieStore, ['movies']),
             ...mapWritableState(useMovieStore, ['search', 'releasedYear', 'page', 'totalResults']),
+            pages() {
+                console.log(parseInt(this.totalResults/10))
+            }
         },
         methods: {
             ...mapActions(useMovieStore, ['searchMovies', 'searchMoviesbyYear', 'searchMoviesByGenre', 'searchMoviesByIds', 'fill']),
