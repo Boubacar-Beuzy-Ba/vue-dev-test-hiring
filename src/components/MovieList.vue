@@ -17,7 +17,7 @@
         </div>
     </div>
     <!-- Pagination UI -->
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center my-4">
       <button
         @click="previous"
         :disabled="page === 1"
@@ -42,34 +42,38 @@
     export default {
         data() {
             return {
-                currentPage: this.page,
-                perPage: 10,
-                total: this.totalResults,
                 genre: 'action'
             }
         },
          computed: {
-            ...mapState(useMovieStore, ['movies', 'totalResults']),
-            ...mapWritableState(useMovieStore, ['search', 'releasedYear', 'page']),
+            ...mapState(useMovieStore, ['movies']),
+            ...mapWritableState(useMovieStore, ['search', 'releasedYear', 'page', 'totalResults']),
         },
         methods: {
             ...mapActions(useMovieStore, ['searchMovies', 'searchMoviesbyYear', 'searchMoviesByGenre', 'searchMoviesByIds', 'fill']),
             previous() {
                 if(this.page > 1) {
                     this.page--;
-                    this.fill();
-                } else {
-                    null
+                    this.$nextTick(() => {
+                        this.search === '' ? this.fill() : this.searchMovies();
+                    });
                 }
             },
             next() {
-                if (this.page < this.totalResults) {
+                const currentPage = parseInt(this.page);
+                const totalResults = parseInt(this.totalResults);
+                if (currentPage < totalResults) {
                     this.page++;
-                    this.fill();
+                    this.$nextTick(() => {
+                    this.search === '' ? this.fill() : this.searchMovies();
+                    });
                 } else {
-                    null
+                    this.page = this.totalResults; // set page to totalResults to prevent going over the limit
                 }
             }
+        },
+        mounted() {
+            this.fill()
         },
     }
 </script>

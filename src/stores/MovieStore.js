@@ -37,11 +37,13 @@ export const useMovieStore = defineStore("MovieStore", {
 
         searchMovies() {
             const q = this.search == 'number' ? 'y' : 's';
-            fetch(`https://www.omdbapi.com/?apikey=${this.apiKey}&${q}=${this.search}`)
+            fetch(`https://www.omdbapi.com/?apikey=${this.apiKey}&${q}=${this.search}&page=${this.page}`)
             .then(res => res.json())
             .then(data => {
+              console.log(data.totalResults)
                 if (data.Response === "True") {
                     this.movies = data.Search;
+                    this.totalResults = parseInt(data.totalResults);
                     console.log(this.movies)
                 } else {
                     // Handle error response
@@ -95,40 +97,7 @@ export const useMovieStore = defineStore("MovieStore", {
                 console.error('Error fetching movies:', error);
               });
           },
-            searchMoviesByIds(ids) { // Pass an array of IDs as argument
-            const apiKey = '18951a20';
-        
-            // Map array of IDs to an array of fetch promises
-            const fetchPromises = ids.map(id =>
-              fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`)
-                .then(res => res.json())
-            );
-        
-            // Wait for all promises to resolve
-            Promise.all(fetchPromises)
-              .then(data => {
-                // Process movie details for each movie
-                const movies = data.map(movieData => {
-                  if (movieData.Response === 'True') {
-                    return movieData;
-                  } else {
-                    // Handle error response
-                    console.error(`Error fetching movie with ID ${movieData.imdbID}: ${movieData.Error}`);
-                    return null;
-                  }
-                });
-        
-                // Filter out null values (error responses)
-                const filteredMovies = movies.filter(movie => movie !== null);
-        
-                this.movies = filteredMovies;
-                console.log(this.movies);
-              })
-              .catch(error => {
-                // Handle fetch error
-                console.error('Error fetching movies:', error);
-              });
-          }
+          
     }
 
     //getters
