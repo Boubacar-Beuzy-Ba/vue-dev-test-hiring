@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-col md:flex-row justify-evenly gap-2 bg-rose-100 max-w-12 md:w-1/2 items-center content-center min-h-12 mx-auto my-4 p-4">
+        <button class="bg-transparent w-full text-sm md:text-xl" @click="fill">OMDB API</button>
         <input v-model="search" @keyup.enter="searchMovies" type="text" placeholder="Search a movie by Title" class="form-input border-none w-full h-12 p-4 outline-none md:text-lg text-base text-black">
         <input v-model="releasedYear" @keyup.enter="searchMoviesbyYear" type="text" placeholder="Search a movie by Year" class="border-none form-input w-full h-12 p-4 outline-none md:text-lg text-base text-black">
         <select @change="searchMoviesByGenre" name="genre" id="genre" class="w-full h-12 form-select rounded-lg border-none">
