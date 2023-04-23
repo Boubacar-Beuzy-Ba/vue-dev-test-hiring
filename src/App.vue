@@ -7,11 +7,10 @@ const movieStore = useMovieStore();
 
 <template>
   <header>
-    <div class=" mx-12 mt-12 text-center">
-      <movie-list></movie-list>
+    <div class="text-center">
+      <router-link to="/" class="btn btn-link no-underline text-black mt-2">Home</router-link>
+      <RouterView />
     </div>
   </header>
-
-  <RouterView />
 </template>
 
