@@ -8,7 +8,7 @@ const movieStore = useMovieStore();
 <template>
   <header>
     <div class="text-center">
-      <router-link to="/" class="btn btn-link no-underline text-black mt-2">Home</router-link>
+      <router-link to="/" class="btn btn-link no-underline text-black dark:text-white mt-2">Home</router-link>
       <RouterView />
     </div>
   </header>

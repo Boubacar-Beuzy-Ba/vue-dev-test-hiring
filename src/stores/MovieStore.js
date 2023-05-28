@@ -10,7 +10,15 @@ export const useMovieStore = defineStore("MovieStore", {
             releasedYear: '',
             totalResults:'',
             page: 1,
-            movieDetail: []
+            movieDetail: [],
+            numbers: [
+                {number: 1, fill: false},
+                {number: 2, fill: false},
+                {number: 3, fill: false},
+                {number: 4, fill: false},
+                {number: 5, fill: false}
+            ],
+            maxRating: 5
         }
     },
     //actions
@@ -73,6 +81,12 @@ export const useMovieStore = defineStore("MovieStore", {
                 // Handle fetch error
                 console.error("Error fetching movies:", error);
             });
+        },
+
+        rateNumber(index) {
+            for (let i = 0; i < index; i++) {
+                this.numbers[i].fill = i <= index - 1;
+            }
         }
     }
 

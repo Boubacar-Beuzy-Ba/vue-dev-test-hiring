@@ -1,8 +1,8 @@
 <template>
     <div class="mx-12">
 
-        <div class="flex flex-col md:flex-row justify-evenly gap-2 bg-rose-100 max-w-12 md:w-1/2 items-center content-center min-h-12 mx-auto my-4 p-4">
-            <input v-model="search" @keyup.enter="searchMovies" type="text" placeholder="Search a movie by Title" class="form-input border-none w-full h-12 p-4 outline-none md:text-lg text-base text-black">
+        <div class="flex flex-col md:flex-row justify-evenly gap-2 dark:bg-transparent bg-rose-100 max-w-12 md:w-1/2 items-center content-center min-h-12 mx-auto my-4 p-4">
+            <input v-model="search" @keyup.enter="searchMovies" type="text" placeholder="Search a movie by Title" class="form-input rounded-lg border-none w-full h-12 p-4 outline-none md:text-lg text-base text-black">
             <!-- <input v-model="releasedYear" @keyup.enter="searchMoviesbyYear" type="text" placeholder="Search a movie by Year" class="border-none form-input w-full h-12 p-4 outline-none md:text-lg text-base text-black">
             <select @change="searchMoviesByGenre" name="genre" id="genre" class="w-full h-12 form-select rounded-lg border-none">
                 <option value=""></option>
@@ -12,10 +12,10 @@
         <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-x-2 space-y-2 items-center">
             <div v-for="(item, index) in movies" :key="index" class="max-w-96 min-h-full flex flex-col item-center content-center relative">
                 <img :src="item.Poster === 'N/A' ? 'https://media.istockphoto.com/id/1191001701/photo/popcorn-and-clapperboard.jpg?s=612x612&w=0&k=20&c=iUkFTVuU8k-UCcZDxczTWs6gkRa0nAMihp2Jf_2ASKM=': item.Poster" :alt="item.Title" class="w-[500px] rounded-lg">
-                <p class="absolute top-1 right-1 bg-yellow-200 p-1 rounded-full">{{ item.Year }}</p>
-                <div class="text-center my-2">
+                <p class="absolute top-1 right-1 bg-yellow-200 dark:text-black p-1 rounded-full">{{ item.Year }}</p>
+                <div class="text-center my-2 dark:text-white">
                     <h1 class="font-semibold text-lg">{{ item.Title }}</h1>
-                    <router-link :to='/movies/+item.imdbID' class="btn btn-outline my-2">More Details ...</router-link>
+                    <router-link :to='/movies/+item.imdbID' class="btn btn-outline my-2 dark:text-white">More Details ...</router-link>
                 </div>
             </div>
         </div>
